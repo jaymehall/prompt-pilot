@@ -1,8 +1,12 @@
 export default function Register() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white px-6 py-4">
-      <h1 className="text-2xl font-bold">Register</h1>
-      <p className="mt-2">This is the Register page.</p>
+    <div className="bg-gradient-to-r from-black to-zinc-900 bg-opacity-95 backdrop-blur-md text-gray-300 px-6 py-10 min-h-screen w-full font-sans leading-relaxed">
+      <h1 className="text-2xl font-bold text-gray-100 tracking-tight mb-6">
+        Registration
+      </h1>
+      <p className="text-gray-300 leading-relaxed">
+        This is the Registration page.
+      </p>
     </div>
   );
 }
