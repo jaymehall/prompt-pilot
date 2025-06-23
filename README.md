@@ -10,13 +10,20 @@ PromptPilot is both a productivity tool and an educational experience: it empowe
 
 ## Features
 
-- Prompt & System Inputs: Side-by-side layout with model selector (GPT-3.5 / GPT-4)
+- Prompt & System Inputs: Side-by-side layout with GPT (Claude/Grok planned)
 - Markdown Output Viewer: Renders GPT responses cleanly
-- Save Sessions: Prompts, system instructions, model, and output stored to DB
+- Save Sessions: Prompts, system instructions, model, and output device-based export/import (cloud/local DB support coming soon)
 - Export/Import Sessions: Save and upload `.md`, `.json`, or `.txt` prompt files
-- User Auth (v2): JWT login system with user-specific session history (planned)
+- Auth (v2): Planned JWT login system with user-specific session history and analytics
 - Polished UI: Dark theme, smooth animations, minimal layout
 - Deployment: Vercel (frontend), Render (backend), PostgreSQL DB
+
+## Project Phases
+
+- v1: Core GPT prompt trainer (local export/import)
+- v1.5: Add Claude, Grok model toggles
+- v2: JWT auth, user-specific session history (DB-backed)
+- v2.5+: Model comparison, analytics, agent deploy
 
 ## Technologies
 
