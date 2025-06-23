@@ -1,53 +1,42 @@
 export default function Prompting101() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white px-6 py-4 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Prompting 101 – How & Why</h1>
+    <div className="bg-gradient-to-r from-black to-zinc-900 bg-opacity-95 backdrop-blur-md text-gray-300 px-6 py-10 min-h-screen w-full font-sans leading-relaxed">
+
+      <h1 className="text-3xl font-extrabold text-gray-100 tracking-tight mb-8">
+  Prompting 101 – How & Why
+</h1>
+
 
       <nav className="mb-8 space-y-1">
-        <h2 className="text-xl font-semibold mb-2">Table of Contents</h2>
-        <ul className="list-disc list-inside space-y-1 text-blue-400">
-          <li>
-            <a href="#what" className="hover:underline">
-              What Is Prompting?
-            </a>
-          </li>
-          <li>
-            <a href="#why" className="hover:underline">
-              Why It Matters
-            </a>
-          </li>
-          <li>
-            <a href="#history" className="hover:underline">
-              A Brief History of AI
-            </a>
-          </li>
-          <li>
-            <a href="#training" className="hover:underline">
-              Understanding AI Training
-            </a>
-          </li>
-          <li>
-            <a href="#understanding" className="hover:underline">
-              How AI Understands Prompts
-            </a>
-          </li>
-          <li>
-            <a href="#tips" className="hover:underline">
-              Tips for Better Prompts
-            </a>
-          </li>
-          <li>
-            <a href="#personality" className="hover:underline">
-              Shaping an AI’s “Personality”
-            </a>
-          </li>
-          <li>
-            <a href="#sandbox" className="hover:underline">
-              PromptPilot: Your Testing Ground
-            </a>
-          </li>
-        </ul>
-      </nav>
+  <h2 className="text-xl font-medium text-gray-100 mb-2">Table of Contents</h2>
+  <ul className="space-y-2 pl-2 text-gray-300">
+    <li>
+      <a href="#what" className="hover:text-white transition-all duration-200">• What Is Prompting?</a>
+    </li>
+    <li>
+      <a href="#why" className="hover:text-white transition-all duration-200">• Why It Matters</a>
+    </li>
+    <li>
+      <a href="#history" className="hover:text-white transition-all duration-200">• A Brief History of AI</a>
+    </li>
+    <li>
+      <a href="#training" className="hover:text-white transition-all duration-200">• Understanding AI Training</a>
+    </li>
+    <li>
+      <a href="#understanding" className="hover:text-white transition-all duration-200">• How AI Understands Prompts</a>
+    </li>
+    <li>
+      <a href="#tips" className="hover:text-white transition-all duration-200">• Tips for Better Prompts</a>
+    </li>
+    <li>
+      <a href="#personality" className="hover:text-white transition-all duration-200">• Shaping an AI’s “Personality”</a>
+    </li>
+    <li>
+      <a href="#sandbox" className="hover:text-white transition-all duration-200">• PromptPilot: Your Testing Ground</a>
+    </li>
+  </ul>
+</nav>
+
 
       <section id="what" className="mb-10">
         <h2 className="text-2xl font-semibold mb-2">What Is Prompting?</h2>
@@ -108,7 +97,10 @@ export default function Prompting101() {
       </section>
 
       <section id="history" className="mb-10">
-        <h2 className="text-2xl font-semibold mb-2">A Brief History of AI</h2>
+        <h2 className="text-2xl font-bold text-gray-100 tracking-tight mb-6">
+          A Brief History of AI
+        </h2>
+
         <p className="leading-relaxed">
           AI isn’t new. The idea of machines that think has been around for
           decades — even centuries in science fiction. But the kind of AI we use
@@ -116,51 +108,55 @@ export default function Prompting101() {
           breakthroughs and innovation.
         </p>
 
-        <ul className="mt-2 list-disc list-inside space-y-1">
+        <ul className="space-y-4 mt-4">
           <li>
-            <strong>1950s–1970s:</strong> The Birth of the Idea – Alan Turing
-            asked: Can machines think? This sparked early rule-based systems.
-            They weren’t flexible — but they laid the foundation.
+            <span className="font-semibold text-blue-300">1950s–1970s:</span>{" "}
+            The Birth of the Idea – Alan Turing asked: Can machines think? This
+            sparked early rule-based systems. They weren’t flexible — but they
+            laid the foundation.
           </li>
           <li>
-            <strong>1980s–1990s:</strong> Expert Systems – AI ran on hard-coded
-            rules. These systems made decisions in narrow fields — but couldn’t
-            adapt or learn like humans.
+            <span className="font-semibold text-blue-300">1980s–1990s:</span>{" "}
+            Expert Systems – AI ran on hard-coded rules. These systems made
+            decisions in narrow fields — but couldn’t adapt or learn like
+            humans.
           </li>
           <li>
-            <strong>2000s–2010s:</strong> Machine Learning – Data took over.
-            Algorithms began learning patterns from massive datasets instead of
-            being manually programmed. This era gave rise to deep learning and
-            neural networks.
+            <span className="font-semibold text-blue-300">2000s–2010s:</span>{" "}
+            Machine Learning – Data took over. Algorithms began learning
+            patterns from massive datasets instead of being manually programmed.
+            This era gave rise to deep learning and neural networks.
           </li>
           <li>
-            <strong>2018–2020:</strong> The Transformer Revolution – New models
-            like BERT (from Google) and GPT (from OpenAI) introduced the
-            Transformer architecture — allowing AI to generate language with
-            remarkable coherence.
+            <span className="font-semibold text-blue-300">2018–2020:</span> The
+            Transformer Revolution – New models like BERT (from Google) and GPT
+            (from OpenAI) introduced the Transformer architecture — allowing AI
+            to generate language with remarkable coherence.
           </li>
           <li>
-            <strong>2020–Today:</strong> The Era of Large Language Models – We
-            entered the age of LLMs (Large Language Models) like OpenAI’s
-            ChatGPT, Anthropic’s Claude, Google’s Gemini, xAI’s Grok, Meta’s
-            LLaMA, and others.
+            <span className="font-semibold text-blue-300">2020–Today:</span> The
+            Era of Large Language Models – We entered the age of LLMs like
+            ChatGPT, Claude, Grok, Gemini, and more.
           </li>
         </ul>
 
-        <p className="mt-2">
-          <strong>ChatGPT, Claude, Grok, Gemini — these are all LLMs.</strong>
+        <p className="mt-4 text-gray-300">
+          <span className="text-gray-100 font-medium">
+            ChatGPT, Claude, Grok, Gemini — these are all LLMs.
+          </span>
           <br />
           They are trained on massive amounts of text to generate human-like
           responses — not by thinking, but by predicting patterns in language.
         </p>
 
-        <p className="mt-2">
-          That’s where <strong>you</strong> come in.
+        <p className="mt-4 text-gray-300">
+          That’s where{" "}
+          <span className="text-gray-100 font-medium italic">you</span> come in.
           <br />
           You don’t need to build a model from scratch.
           <br />
           You just need to know how to talk to it — how to{" "}
-          <strong>prompt</strong> it.
+          <span className="text-gray-100 font-medium italic">prompt</span> it.
         </p>
       </section>
 
@@ -407,48 +403,83 @@ export default function Prompting101() {
           assistants, or apps — already tuned and tested.
         </p>
       </section>
-
       <section id="resources" className="mb-16">
-  <h2 className="text-2xl font-semibold mb-2">Further Reading & Resources</h2>
-  <ul className="list-disc list-inside space-y-3 text-blue-400">
-    <li>
-      <a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" rel="noopener noreferrer" className="hover:underline">
-        OpenAI – Prompt Engineering Guide
-      </a>
-    </li>
-    <li>
-      <a href="https://github.com/openai/openai-cookbook" target="_blank" rel="noopener noreferrer" className="hover:underline">
-        OpenAI Cookbook – Real-World Prompt Examples
-      </a>
-    </li>
-    <li>
-      <a href="https://docs.anthropic.com/claude/docs/prompting" target="_blank" rel="noopener noreferrer" className="hover:underline">
-        Anthropic – Claude Prompting Guide
-      </a>
-    </li>
-    <li>
-      <a href="https://huggingface.co/learn/nlp-course/chapter1/1" target="_blank" rel="noopener noreferrer" className="hover:underline">
-        Hugging Face – What Are LLMs?
-      </a>
-    </li>
-    <li>
-      <a href="https://chat.openai.com/gpts/editor" target="_blank" rel="noopener noreferrer" className="hover:underline">
-        ChatGPT – Custom GPT Builder
-      </a>
-    </li>
-    <li>
-      <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" className="hover:underline">
-        Claude – Try Claude (Anthropic)
-      </a>
-    </li>
-    <li>
-      <a href="https://x.ai/blog/introducing-grok" target="_blank" rel="noopener noreferrer" className="hover:underline">
-        xAI – Intro to Grok
-      </a>
-    </li>
-  </ul>
-</section>
-
+        <h2 className="text-2xl font-semibold mb-2">
+          Further Reading & Resources
+        </h2>
+        <ul className="space-y-2 pl-2 text-blue-400">
+          <li>
+            <a
+              href="https://platform.openai.com/docs/guides/prompt-engineering"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-300 transition-all duration-200"
+            >
+              • OpenAI – Prompt Engineering Guide
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/openai/openai-cookbook"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-300 transition-all duration-200"
+            >
+              • OpenAI Cookbook – Real-World Prompt Examples
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://docs.anthropic.com/claude/docs/prompting"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-300 transition-all duration-200"
+            >
+              • Anthropic – Claude Prompting Guide
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://huggingface.co/learn/nlp-course/chapter1/1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-300 transition-all duration-200"
+            >
+              • Hugging Face – What Are LLMs?
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://chat.openai.com/gpts/editor"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-300 transition-all duration-200"
+            >
+              • ChatGPT – Custom GPT Builder
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://claude.ai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-300 transition-all duration-200"
+            >
+              • Claude – Try Claude (Anthropic)
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://x.ai/blog/introducing-grok"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-300 transition-all duration-200"
+            >
+              • xAI – Intro to Grok
+            </a>
+          </li>
+        </ul>
+      </section>
     </div>
   );
 }
