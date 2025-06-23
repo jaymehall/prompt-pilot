@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
+  const location = useLocation();
+
   return (
     <motion.nav className="sticky top-0 z-50 bg-gradient-to-r from-[rgba(0,0,0,0.5)] to-[rgba(24,24,27,0.5)] backdrop-blur-md text-gray-300 px-6 py-4 shadow-md">
       <motion.div
@@ -14,31 +16,31 @@ export default function Navbar() {
           to="/"
           className="text-lg text-gray-300 hover:text-white hover:brightness-125 hover:scale-105 transition-all duration-200"
         >
-          Home
+          {location.pathname === "/" ? "{Home}" : "Home"}
         </Link>
         <Link
           to="/prompt"
           className="text-lg text-gray-300 hover:text-white hover:brightness-125 hover:scale-105 transition-all duration-200"
         >
-          Prompt Tool
+          {location.pathname === "/prompt" ? "{Prompt Tool}" : "Prompt Tool"}
         </Link>
         <Link
           to="/prompting101"
           className="text-lg text-gray-300 hover:text-white hover:brightness-125 hover:scale-105 transition-all duration-200"
         >
-          Prompting 101
+          {location.pathname === "/prompting101" ? "{Prompting 101}" : "Prompting 101"}
         </Link>
         <Link
           to="/login"
           className="text-lg text-gray-300 hover:text-white hover:brightness-125 hover:scale-105 transition-all duration-200 ml-auto"
         >
-          Login
+          {location.pathname === "/login" ? "{Login}" : "Login"}
         </Link>
         <Link
           to="/register"
           className="text-lg text-gray-300 hover:text-white hover:brightness-125 hover:scale-105 transition-all duration-200"
         >
-          Register
+          {location.pathname === "/register" ? "{Register}" : "Register"}
         </Link>
       </motion.div>
     </motion.nav>

@@ -15,15 +15,15 @@ export default function Home() {
           PromptPilot
         </h1>
 
-        <p className="text-lg text-gray-400 max-w-xl mb-8">
+        <p className="text-lg text-gray-400 max-w-xl mb-5">
           Your path to AI integration and customization awaits...
         </p>
 
         <Link
           to="/prompt"
-          className="bg-white/10 text-gray-200 px-6 py-3 rounded-full backdrop-blur-md hover:scale-105 hover:brightness-125 transition-all duration-200"
+          className="bg-white/10 text-gray-200 px-5 py-2 text-sm rounded-full backdrop-blur-md hover:scale-105 hover:brightness-125 transition-all duration-200"
         >
-          → Enter
+          ↵ Enter
         </Link>
       </motion.div>
     </PageWrapper>
