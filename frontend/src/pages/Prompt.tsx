@@ -1,12 +1,12 @@
+import PageWrapper from "../components/PageWrapper";
+
 export default function Prompt() {
   return (
-    <div className="bg-gradient-to-r from-black to-zinc-900 bg-opacity-95 backdrop-blur-md text-gray-300 px-6 py-10 min-h-screen w-full font-sans leading-relaxed">
+    <PageWrapper>
       <h1 className="text-2xl font-bold text-gray-100 tracking-tight mb-6">
         Prompt Tool
       </h1>
-      <p className="text-gray-300 leading-relaxed">
-        This is the Prompt Tool page.
-      </p>
-    </div>
+      <p className="text-gray-300 leading-relaxed">This is the Prompt Tool page.</p>
+    </PageWrapper>
   );
 }

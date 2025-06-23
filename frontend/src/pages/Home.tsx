@@ -1,10 +1,31 @@
+import PageWrapper from "../components/PageWrapper";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
 export default function Home() {
   return (
-    <div className="bg-gradient-to-r from-black to-zinc-900 bg-opacity-95 backdrop-blur-md text-gray-300 px-6 py-10 min-h-screen w-full font-sans leading-relaxed">
-      <h1 className="text-2xl font-bold text-gray-100 tracking-tight mb-6">
-        Home Page
-      </h1>
-      <p className="text-gray-300 leading-relaxed">This is the Home page.</p>
-    </div>
+    <PageWrapper>
+      <motion.div
+        initial={{ y: -60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1.2, ease: [0.25, 0.8, 0.25, 1] }}
+        className="flex flex-col items-center justify-center text-center min-h-[80vh]"
+      >
+        <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2 animate-pulse">
+          PromptPilot
+        </h1>
+
+        <p className="text-lg text-gray-400 max-w-xl mb-8">
+          Your path to AI integration and customization awaits...
+        </p>
+
+        <Link
+          to="/prompt"
+          className="bg-white/10 text-gray-200 px-6 py-3 rounded-full backdrop-blur-md hover:scale-105 hover:brightness-125 transition-all duration-200"
+        >
+          → Enter
+        </Link>
+      </motion.div>
+    </PageWrapper>
   );
 }

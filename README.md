@@ -1,6 +1,4 @@
 # PromptPilot
-  
-**GitHub Repo:** [https://github.com/Cyberbot777/prompt-pilot](https://github.com/Cyberbot777/prompt-pilot)
 
 ## Overview
 
