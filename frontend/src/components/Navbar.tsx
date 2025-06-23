@@ -6,7 +6,8 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 1.2, ease: [0.25, 0.8, 0.25, 1] }}
+
       className="bg-gradient-to-r from-[#0f172a] to-[#10172a] bg-opacity-90 backdrop-blur-sm text-white px-6 py-4 flex gap-6 items-center shadow-md"
     >
       <Link to="/" className="hover:text-blue-400 transition-colors duration-200">Home</Link>
