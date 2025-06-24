@@ -12,7 +12,6 @@ export default function Prompt() {
   // Refs //
   const outputRef = useRef<HTMLDivElement>(null);
 
-
   return (
     <PageWrapper>
       {/* Page Title */}
@@ -95,6 +94,14 @@ export default function Prompt() {
                     ...prev,
                     { role: "user", content: input },
                   ]);
+
+                  // Debug logs added here
+                  console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
+                  console.log("Sending to /api/generate:", {
+                    systemInstruction,
+                    messages: [...messages, { role: "user", content: input }],
+                    model: "gpt-3.5-turbo",
+                  });
 
                   fetch(`${import.meta.env.VITE_API_URL}/api/generate`, {
                     method: "POST",
