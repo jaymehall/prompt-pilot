@@ -22,7 +22,7 @@ export default function Navbar() {
           to="/prompt"
           className="text-lg text-gray-300 hover:text-white hover:brightness-125 hover:scale-105 transition-all duration-200"
         >
-          {location.pathname === "/prompt" ? "{Prompt Tool}" : "Prompt Tool"}
+          {location.pathname === "/prompt" ? "{Prompt Lab}" : "Prompt Lab"}
         </Link>
         <Link
           to="/prompting101"
