@@ -1,17 +1,17 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import PageWrapper from "../components/PageWrapper";
 import { motion } from "framer-motion";
 
 export default function Prompt() {
-  // ====== State ======
+  // State //
   const [systemInstruction, setSystemInstruction] = useState("");
   const [messages, setMessages] = useState([
     { role: "assistant", content: "GPT responses will show here..." },
   ]);
-  const [isTyping, setIsTyping] = useState(false);
 
   // Refs //
-  const outputRef = useRef(null);
+  const outputRef = useRef<HTMLDivElement>(null);
+
 
   return (
     <PageWrapper>
@@ -96,7 +96,7 @@ export default function Prompt() {
                     { role: "user", content: input },
                   ]);
 
-                  fetch("https://prompt-pilot-vcol.onrender.com/api/generate", {
+                  fetch(`${import.meta.env.VITE_API_URL}/api/generate`, {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
@@ -112,7 +112,6 @@ export default function Prompt() {
                       if (data.message) {
                         const fullReply = data.message;
                         let currentText = "";
-                        setIsTyping(true);
                         let i = 0;
 
                         const typingInterval = setInterval(() => {
@@ -142,7 +141,6 @@ export default function Prompt() {
 
                           if (i >= fullReply.length) {
                             clearInterval(typingInterval);
-                            setIsTyping(false);
                           }
                         }, 40);
                       } else {
