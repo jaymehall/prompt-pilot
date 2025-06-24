@@ -16,7 +16,9 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://prompt-pilot-pi.vercel.app"
+        "https://prompt-pilot-pi.vercel.app",
+        "https://prompt-pilot.ai",
+        "https://www.prompt-pilot.ai",
     ],
     allow_credentials=True,
     allow_methods=["*"],
