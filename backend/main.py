@@ -32,7 +32,7 @@ class GenerateRequest(BaseModel):
 @app.post("/api/generate")
 async def generate(data: GenerateRequest):
     try:
-        print("📥 Received request to /api/generate")
+        print("Received request to /api/generate")
         print("System instruction:", data.systemInstruction)
         print("Messages:", data.messages)
 
@@ -44,14 +44,14 @@ async def generate(data: GenerateRequest):
             ],
         )
 
-        print("✅ OpenAI response:", response)
+        print("OpenAI response:", response)
 
         return {
             "message": response.choices[0].message.content
         }
 
     except Exception as e:
-        print("❌ OpenAI API call failed:", e)
+        print("OpenAI API call failed:", e)
         return {"error": str(e)}
 
 @app.get("/api/ping")
