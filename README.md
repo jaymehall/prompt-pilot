@@ -1,5 +1,9 @@
 # PromptPilot
 
+🌐 **Live Site:** [https://prompt-pilot.ai](https://prompt-pilot.ai)
+
+---
+
 ## Overview
 
 **PromptPilot** is a full-stack AI customization tool that lets users design, test, and refine GPT agents using custom prompts and system instructions — all in a polished, side-by-side interface. Built with React, FastAPI, and PostgreSQL, the platform supports OpenAI API integration, secure prompt sessions, and user-friendly UX with a dark, modern aesthetic.
@@ -102,7 +106,7 @@ Set these in `.env` files (frontend & backend as needed):
 ## Timeline
 
 - Created: June 22, 2025  
-- Status: In active development
+- Last Updated: June 24, 2025
 
 ---
 
