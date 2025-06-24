@@ -1,24 +1,27 @@
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import PageWrapper from "../components/PageWrapper";
 import { motion } from "framer-motion";
 
 export default function Prompt() {
+  // ====== State ======
   const [systemInstruction, setSystemInstruction] = useState("");
-
   const [messages, setMessages] = useState([
     { role: "assistant", content: "GPT responses will show here..." },
   ]);
-
   const [isTyping, setIsTyping] = useState(false);
+
+  // Refs //
+  const outputRef = useRef(null);
 
   return (
     <PageWrapper>
+      {/* Page Title */}
       <h1 className="text-2xl font-bold text-gray-100 tracking-tight mb-6">
         Prompt Lab
       </h1>
 
       <div className="flex flex-col md:flex-row gap-6 h-[80vh]">
-        {/* Left Panel: Terminal-style prompt input */}
+        {/* Left Panel: System Instruction Input */}
         <div className="w-full md:w-1/2 bg-black/60 border border-zinc-800 rounded-xl p-4 shadow-inner">
           <div className="font-mono text-green-400 space-y-6">
             <div>
@@ -45,12 +48,15 @@ export default function Prompt() {
           </div>
         </div>
 
-        {/* Right Panel: Terminal-style GPT message viewer */}
+        {/* Right Panel: GPT Chat Output */}
         <div className="w-full md:w-1/2 bg-zinc-900/40 border border-zinc-800 rounded-xl p-4 flex flex-col">
           <p className="text-blue-300 font-mono mb-2">Model Output</p>
 
-          <div className="flex-1 overflow-y-auto text-gray-300 font-mono text-sm space-y-2 scroll-output">
-
+          {/* Message Viewer */}
+          <div
+            ref={outputRef}
+            className="flex-1 overflow-y-auto text-gray-300 font-mono text-sm space-y-2 scroll-output"
+          >
             {messages.map((msg, i) => {
               if (
                 i === 0 &&
@@ -71,6 +77,7 @@ export default function Prompt() {
             })}
           </div>
 
+          {/* User Input Field  */}
           <div className="mt-4">
             <motion.textarea
               rows={1}
@@ -125,11 +132,19 @@ export default function Prompt() {
                             ];
                           });
 
+                          // Auto-scroll to bottom //
+                          setTimeout(() => {
+                            if (outputRef.current) {
+                              outputRef.current.scrollTop =
+                                outputRef.current.scrollHeight;
+                            }
+                          }, 0);
+
                           if (i >= fullReply.length) {
                             clearInterval(typingInterval);
                             setIsTyping(false);
                           }
-                        }, 20);
+                        }, 40);
                       } else {
                         setMessages((prev) => [
                           ...prev,
