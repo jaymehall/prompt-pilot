@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PageWrapper from "../components/PageWrapper";
+import { motion } from "framer-motion";
 
 export default function Prompt() {
   const [systemInstruction, setSystemInstruction] = useState("");
@@ -7,6 +8,8 @@ export default function Prompt() {
   const [messages, setMessages] = useState([
     { role: "assistant", content: "GPT responses will show here..." },
   ]);
+
+  const [isTyping, setIsTyping] = useState(false);
 
   return (
     <PageWrapper>
@@ -18,19 +21,25 @@ export default function Prompt() {
         {/* Left Panel: Terminal-style prompt input */}
         <div className="w-full md:w-1/2 bg-black/60 border border-zinc-800 rounded-xl p-4 shadow-inner">
           <div className="font-mono text-green-400 space-y-6">
-            {/* System Instruction Input */}
             <div>
-              <div>
-                <span className="text-gray-500">user@prompt-lab</span>:
-                <span className="text-blue-400">~</span>$
-                <span className="ml-2">System Instruction:</span>
+              <div className="whitespace-nowrap font-mono">
+                <span className="text-gray-500">user@prompt-lab</span>
+                <span className="text-blue-400">:~$</span>
+                <span className="text-green-300 ml-2">System Instruction:</span>
               </div>
-              <textarea
+
+              <motion.textarea
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
                 value={systemInstruction}
-                onChange={(e) => setSystemInstruction(e.target.value)}
+                onChange={(e) => {
+                  setSystemInstruction(e.target.value);
+                  e.target.style.height = "auto";
+                  e.target.style.height = `${e.target.scrollHeight}px`;
+                }}
                 placeholder="You are a helpful assistant..."
-                className="w-full mt-2 bg-black border border-green-700 text-green-300 p-2 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-green-400"
-                rows={3}
+                className="w-full max-h-[70vh] overflow-auto bg-black border border-green-700 text-green-300 p-2 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-green-400 custom-scroll"
               />
             </div>
           </div>
@@ -40,46 +49,112 @@ export default function Prompt() {
         <div className="w-full md:w-1/2 bg-zinc-900/40 border border-zinc-800 rounded-xl p-4 flex flex-col">
           <p className="text-blue-300 font-mono mb-2">Model Output</p>
 
-          {/* Messages display */}
           <div className="flex-1 overflow-y-auto text-gray-300 font-mono text-sm space-y-2">
-            {messages.map((msg, i) => (
-              <div key={i}>
-                <span className="text-blue-400 font-bold mr-1">
-                  {msg.role === "user" ? "You" : "GPT"}:
-                </span>
-                <span>{msg.content}</span>
-              </div>
-            ))}
+            {messages.map((msg, i) => {
+              if (
+                i === 0 &&
+                msg.content.includes("GPT responses will show here...") &&
+                messages.length > 1
+              ) {
+                return null;
+              }
+
+              return (
+                <div key={i}>
+                  <span className="text-blue-400 font-bold mr-1">
+                    {msg.role === "user" ? "You" : "GPT"}:
+                  </span>
+                  <span>{msg.content}</span>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Input box */}
           <div className="mt-4">
-            <input
-              type="text"
+            <motion.textarea
+              rows={1}
               placeholder="Type a message and press Enter..."
-              className="w-full bg-zinc-900 border border-zinc-700 text-gray-100 p-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
-              
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
                   const input = e.currentTarget.value.trim();
                   if (!input) return;
+
+                  e.currentTarget.value = "";
+                  e.currentTarget.style.height = "auto";
+
                   setMessages((prev) => [
                     ...prev,
                     { role: "user", content: input },
                   ]);
-                  setTimeout(() => {
-                    setMessages((prev) => [
-                      ...prev,
-                      {
-                        role: "assistant",
-                        content: "This is a simulated GPT reply.",
-                      },
-                    ]);
-                  }, 1000);
 
-                  e.currentTarget.value = "";
+                  fetch("http://localhost:8000/api/generate", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      systemInstruction,
+                      messages: [...messages, { role: "user", content: input }],
+                      model: "gpt-3.5-turbo",
+                    }),
+                  })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      if (data.message) {
+                        const fullReply = data.message;
+                        let currentText = "";
+                        setIsTyping(true);
+                        let i = 0;
+
+                        const typingInterval = setInterval(() => {
+                          currentText += fullReply[i];
+                          i++;
+
+                          setMessages((prev) => {
+                            const updated = [...prev];
+                            if (
+                              updated[updated.length - 1]?.role === "assistant"
+                            ) {
+                              updated.pop();
+                            }
+                            return [
+                              ...updated,
+                              { role: "assistant", content: currentText },
+                            ];
+                          });
+
+                          if (i >= fullReply.length) {
+                            clearInterval(typingInterval);
+                            setIsTyping(false);
+                          }
+                        }, 20);
+                      } else {
+                        setMessages((prev) => [
+                          ...prev,
+                          {
+                            role: "assistant",
+                            content: "Error: No response from model.",
+                          },
+                        ]);
+                      }
+                    })
+                    .catch((err) => {
+                      setMessages((prev) => [
+                        ...prev,
+                        {
+                          role: "assistant",
+                          content: `Error: ${err.message}`,
+                        },
+                      ]);
+                    });
                 }
               }}
+              onInput={(e) => {
+                e.currentTarget.style.height = "auto";
+                e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+              }}
+              className="w-full max-h-[200px] overflow-auto bg-zinc-900 border border-zinc-700 text-gray-100 p-2 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 rounded custom-scroll"
             />
           </div>
         </div>
