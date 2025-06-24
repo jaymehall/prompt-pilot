@@ -96,7 +96,7 @@ export default function Prompt() {
                     { role: "user", content: input },
                   ]);
 
-                  fetch("http://localhost:8000/api/generate", {
+                  fetch("https://prompt-pilot-vcol.onrender.com/api/generate", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
