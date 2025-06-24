@@ -1,7 +1,6 @@
+# PromptPilot Production Notes
 
-# PromptPilot Production Notes  
-
-**Project Status:** June 23, 2025
+**Project Status:** Updated June 24, 2025
 
 ---
 
@@ -15,6 +14,7 @@ This document details:
 - UI behavior
 - Custom styling decisions
 - Backend API integration
+- Production deployment + custom domain setup
 
 ---
 
@@ -53,7 +53,11 @@ This document details:
 **Security:**
 - OpenAI key loaded via `.env`
 - Backend proxy isolates secret key from frontend
-- CORS configured for `http://localhost:5173`
+- CORS configured for:
+  - `http://localhost:5173`
+  - `https://prompt-pilot-pi.vercel.app`
+  - `https://prompt-pilot.ai`
+  - `https://www.prompt-pilot.ai`
 
 ---
 
@@ -78,49 +82,43 @@ This document details:
   - Uses class `.scroll-blue`
 - GPT response area
   - Chat log in a `div` with vertical scroll
-  - Typing effect animates one character at a time
+  - Typing effect animates one character at a time (currently 40ms delay)
   - Scrollbar styled to match UI (`.scroll-output`)
-
----
-
-## Custom Styling
-
-### index.css custom classes
-
-```css
-.custom-scroll {
-  scrollbar-color: #4ade80 transparent;
-  ...
-}
-
-.scroll-blue {
-  scrollbar-color: #60a5fa #1e293b;
-  ...
-}
-
-.scroll-output {
-  scrollbar-color: #60a5fa #1e293b;
-  ...
-}
-```
-
-All scrollbars across system inputs, user chat, and GPT output are consistent with the terminal/utility styling.
+  - **Auto-scrolls to bottom** as new characters appear
 
 ---
 
 ## UX Behavior
 
 - Placeholder message disappears after first user prompt
-- GPT replies animate in using `setInterval()` with a 20ms delay per character
+- GPT replies animate in using `setInterval()` with a 40ms delay per character
 - Instruction editing does not reset chat
-- Scroll-to-bottom behavior is currently manual (auto-scroll TBD)
+- **Auto-scroll now active** when GPT replies
 - Focus remains in input field after reply
+- Real-time debugging logs active during fetch to track env and payload behavior
 
 ---
 
-## Decisions Locked
+## Deployment Notes
 
-- Scrollbars now visually consistent and thematically matched
-- System instruction label is pinned to one line — terminal-style
-- No animated or color-based state changes for user input typing (deliberate to preserve CLI feel)
-- Scrollbar colors match `focus:ring-*` inputs exactly using Tailwind palette values
+- **Frontend:** Vercel  
+  - Connected to GitHub `main` branch  
+  - Environment variable `VITE_API_URL` set to point to backend Render URL  
+- **Backend:** Render  
+  - Deployed via GitHub with `OPENAI_API_KEY` in `.env`  
+  - CORS updated to support full production stack
+
+---
+
+## Custom Domain
+
+- Registered: `prompt-pilot.ai`
+- Connected to Vercel with:
+  - `A Record (@)` → `216.198.79.193`
+  - `CNAME (www)` → `d84194a5b92e78b9.vercel-dns-017.com`
+- SSL issued successfully via Vercel
+- Full-stack live at:  
+  https://prompt-pilot.ai  
+  https://www.prompt-pilot.ai
+
+---

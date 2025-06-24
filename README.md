@@ -95,16 +95,6 @@ Set these in `.env` files (frontend & backend as needed):
 
 ---
 
-## Folder Structure
-
-```
-prompt-pilot/
-├── frontend/     # Vite + React + Tailwind
-└── backend/      # FastAPI + PostgreSQL + OpenAI
-```
-
----
-
 ## Author
 
 - Richard Hall
