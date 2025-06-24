@@ -32,7 +32,40 @@ html, body {
   background: transparent;
 }
 
+/* Blue scrollbar for user input */
+.scroll-blue {
+  scrollbar-width: thin;
+  scrollbar-color: #60a5fa #1e293b; 
+}
 
+.scroll-blue::-webkit-scrollbar {
+  width: 6px;
+}
 
+.scroll-blue::-webkit-scrollbar-thumb {
+  background-color: #60a5fa !important; 
+  border-radius: 8px;
+}
 
+.scroll-blue::-webkit-scrollbar-track {
+  background: #1e293b; 
+}
 
+/* AI Chat scrollbar */
+.scroll-output {
+  scrollbar-width: thin;
+  scrollbar-color: #60a5fa #1e293b;
+}
+
+.scroll-output::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-output::-webkit-scrollbar-thumb {
+  background-color: #60a5fa;
+  border-radius: 8px;
+}
+
+.scroll-output::-webkit-scrollbar-track {
+  background: #1e293b;
+}

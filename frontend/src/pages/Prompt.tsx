@@ -49,7 +49,8 @@ export default function Prompt() {
         <div className="w-full md:w-1/2 bg-zinc-900/40 border border-zinc-800 rounded-xl p-4 flex flex-col">
           <p className="text-blue-300 font-mono mb-2">Model Output</p>
 
-          <div className="flex-1 overflow-y-auto text-gray-300 font-mono text-sm space-y-2">
+          <div className="flex-1 overflow-y-auto text-gray-300 font-mono text-sm space-y-2 scroll-output">
+
             {messages.map((msg, i) => {
               if (
                 i === 0 &&
@@ -154,7 +155,7 @@ export default function Prompt() {
                 e.currentTarget.style.height = "auto";
                 e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
               }}
-              className="w-full max-h-[200px] overflow-auto bg-zinc-900 border border-zinc-700 text-gray-100 p-2 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 rounded custom-scroll"
+              className="w-full max-h-[200px] overflow-auto bg-zinc-900 border border-zinc-700 text-gray-100 p-2 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400 rounded scroll-blue"
             />
           </div>
         </div>
