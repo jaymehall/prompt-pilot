@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import PageWrapper from "../components/PageWrapper";
 import { motion } from "framer-motion";
+import MarkdownOutput from "../components/MarkdownOutput";
 
 export default function Prompt() {
   // State //
@@ -96,7 +97,10 @@ export default function Prompt() {
             {messages.map((msg, i) => {
               if (
                 i === 0 &&
-                msg.content.includes("responses will show here...") &&
+                msg.role === "assistant" &&
+                msg.content
+                  .toLowerCase()
+                  .includes("responses will show here") &&
                 messages.length > 1
               ) {
                 return null;
@@ -112,7 +116,7 @@ export default function Prompt() {
               return (
                 <div key={i}>
                   <span className="text-blue-400 font-bold mr-1">{label}:</span>
-                  <span>{msg.content}</span>
+                  <MarkdownOutput content={msg.content} />
                 </div>
               );
             })}
