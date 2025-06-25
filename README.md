@@ -6,14 +6,16 @@
 
 ## Overview
 
-**PromptPilot** is a full-stack AI customization tool that lets users design, test, and refine GPT agents using custom prompts and system instructions — all in a polished, side-by-side interface. Built with React, FastAPI, and PostgreSQL, the platform supports OpenAI API integration, secure prompt sessions, and user-friendly UX with a dark, modern aesthetic.
+**PromptPilot** is a full-stack AI customization tool that lets users design, test, and refine GPT agents using custom prompts and system instructions — all in a polished, side-by-side interface. Built with React, FastAPI, and PostgreSQL, the platform supports OpenAI and Claude API integration, secure prompt sessions, and user-friendly UX with a dark, modern aesthetic.
 
 PromptPilot is both a productivity tool and an educational experience: it empowers anyone — devs, writers, educators — to explore AI behavior design without needing to code.
 
 ## Features
 
-- Prompt & System Inputs: Side-by-side layout with GPT (Claude/Grok planned)
-- Markdown Output Viewer: Renders GPT responses cleanly
+- Prompt & System Inputs: Side-by-side layout with GPT and Claude (Grok planned)
+- Model Toggle: Seamless GPT-3.5 and Claude 3.5 selection with persistent context
+- Dynamic Labeling: Assistant responses labeled as GPT or Claude in real-time
+- Markdown Output Viewer: Renders LLM responses cleanly
 - Save Sessions: Prompts, system instructions, model, and output device-based export/import (cloud/local DB support coming soon)
 - Export/Import Sessions: Save and upload `.md`, `.json`, or `.txt` prompt files
 - Auth (v2): Planned JWT login system with user-specific session history and analytics
@@ -23,7 +25,7 @@ PromptPilot is both a productivity tool and an educational experience: it empowe
 ## Project Phases
 
 - v1: Core GPT prompt trainer (local export/import)
-- v1.5: Add Claude, Grok model toggles
+- v1.5: Add Claude model support, toggle UI
 - v2: JWT auth, user-specific session history (DB-backed)
 - v2.5+: Model comparison, analytics, agent deploy
 
@@ -38,15 +40,17 @@ PromptPilot is both a productivity tool and an educational experience: it empowe
 
 ### Backend
 - FastAPI (Python)
-- OpenAI API (via backend proxy)
+- OpenAI + Anthropic Claude APIs (via backend proxy)
 - PostgreSQL (session history)
 - SQLAlchemy (ORM)
 - Deployed via Render
 
 ## Skills Demonstrated
 - Full-stack app architecture
-- Secure API proxying (OpenAI)
+- Multi-model API routing (GPT + Claude)
+- Secure API proxying (OpenAI + Claude)
 - Prompt engineering + structured testing
+- Dynamic LLM labeling and UI feedback
 - Dark-themed responsive UI
 - RESTful API design with FastAPI + PostgreSQL
 - JWT auth and session storage (v2)
@@ -95,6 +99,7 @@ Backend will run at: [http://localhost:8000](http://localhost:8000)
 Set these in `.env` files (frontend & backend as needed):
 
 - `OPENAI_API_KEY`
+- `CLAUDE_API_KEY`
 - `DATABASE_URL`
 
 ---
@@ -106,7 +111,7 @@ Set these in `.env` files (frontend & backend as needed):
 ## Timeline
 
 - Created: June 22, 2025  
-- Last Updated: June 24, 2025
+- Last Updated: June 25, 2025
 
 ---
 
