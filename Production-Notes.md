@@ -15,6 +15,7 @@ This document details:
 - Custom styling decisions
 - Backend API integration
 - Production deployment + custom domain setup
+- Multi-model Claude integration with model labeling
 
 ---
 
@@ -22,7 +23,7 @@ This document details:
 
 - **Frontend:** React (Vite) + TypeScript + TailwindCSS + Framer Motion
 - **Backend:** FastAPI (Python 3.11), served via Uvicorn
-- **LLM API:** OpenAI `gpt-3.5-turbo` (via `/v1/chat/completions`)
+- **LLM API:** OpenAI `gpt-3.5-turbo`, Anthropic `claude-3-5-sonnet-20241022`
 - **Deployment Target:** Vercel (frontend), Render (backend)
 - **Styling:** TailwindCSS + custom scrollbar overrides via `index.css`
 
@@ -37,12 +38,12 @@ This document details:
   {
     "systemInstruction": "string",
     "messages": [{ "role": "user" | "assistant", "content": "string" }],
-    "model": "gpt-3.5-turbo"
+    "model": "gpt-3.5-turbo" | "claude-3-5-sonnet-20241022"
   }
   ```
-- Calls OpenAI Chat API:
-  - Injects `systemInstruction` as role: `"system"`
-  - Includes full message history (`user`, `assistant`)
+- Routes to:
+  - OpenAI Chat API for GPT-3.5
+  - Anthropic Messages API for Claude
 - Returns:
   ```json
   {
@@ -51,8 +52,10 @@ This document details:
   ```
 
 **Security:**
-- OpenAI key loaded via `.env`
-- Backend proxy isolates secret key from frontend
+- API keys loaded via `.env`:
+  - `OPENAI_API_KEY`
+  - `CLAUDE_API_KEY`
+- Backend proxy isolates secret keys from frontend
 - CORS configured for:
   - `http://localhost:5173`
   - `https://prompt-pilot-pi.vercel.app`
@@ -74,15 +77,16 @@ This document details:
 
 ### ➤ Right Panel (AI Chat)
 
+- Model toggle radio buttons centered above output
 - User input textarea
   - Expandable
   - Press `Enter` to send
   - Press `Shift+Enter` for newlines
   - Scrollbar styled to match input ring blue (`#60a5fa`)
   - Uses class `.scroll-blue`
-- GPT response area
-  - Chat log in a `div` with vertical scroll
-  - Typing effect animates one character at a time (currently 40ms delay)
+- GPT/Claude response area
+  - Typing effect animates one character at a time (40ms)
+  - Messages are dynamically labeled: `GPT:`, `Claude:`, `You:`
   - Scrollbar styled to match UI (`.scroll-output`)
   - **Auto-scrolls to bottom** as new characters appear
 
@@ -90,12 +94,14 @@ This document details:
 
 ## UX Behavior
 
-- Placeholder message disappears after first user prompt
-- GPT replies animate in using `setInterval()` with a 40ms delay per character
+- Placeholder message dynamically updates to reflect selected model
+- Claude and GPT responses labeled clearly
+- GPT replies animate in using `setInterval()` with 40ms delay
 - Instruction editing does not reset chat
-- **Auto-scroll now active** when GPT replies
+- Auto-scroll behavior is active during reply animation
+- Model toggle maintains session context on frontend
 - Focus remains in input field after reply
-- Real-time debugging logs active during fetch to track env and payload behavior
+- Debug logs active during fetch
 
 ---
 
@@ -103,10 +109,10 @@ This document details:
 
 - **Frontend:** Vercel  
   - Connected to GitHub `main` branch  
-  - Environment variable `VITE_API_URL` set to point to backend Render URL  
+  - Environment variable `VITE_API_URL` set to backend Render URL  
 - **Backend:** Render  
-  - Deployed via GitHub with `OPENAI_API_KEY` in `.env`  
-  - CORS updated to support full production stack
+  - Deployed via GitHub with keys stored in `.env`  
+  - CORS updated for all frontends (localhost + production)
 
 ---
 
