@@ -20,8 +20,8 @@ export default function Prompt() {
 
   // Refs //
   const outputRef = useRef<HTMLDivElement>(null);
-
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const systemInputRef = useRef<HTMLTextAreaElement | null>(null);
 
   const handleImportClick = () => {
     if (fileInputRef.current) {
@@ -29,16 +29,15 @@ export default function Prompt() {
     }
   };
 
-//   const handleExport = () => {
-//   const blob = new Blob([systemInstruction], { type: "text/plain" });
-//   const url = URL.createObjectURL(blob);
-//   const a = document.createElement("a");
-//   a.href = url;
-//   a.download = `system-instruction-${Date.now()}.txt`;
-//   a.click();
-//   URL.revokeObjectURL(url);
-// };
-
+  //   const handleExport = () => {
+  //   const blob = new Blob([systemInstruction], { type: "text/plain" });
+  //   const url = URL.createObjectURL(blob);
+  //   const a = document.createElement("a");
+  //   a.href = url;
+  //   a.download = `system-instruction-${Date.now()}.txt`;
+  //   a.click();
+  //   URL.revokeObjectURL(url);
+  // };
 
   return (
     <PageWrapper>
@@ -94,20 +93,57 @@ export default function Prompt() {
         </button>
       </div>
 
-      {/* File input for uploading .txt system instructions */}
+      {/* File input for uploading .txt, .json, or .md system instructions */}
       <input
         type="file"
-        accept=".txt"
+        accept=".txt,.json,.md"
         ref={fileInputRef}
         onChange={(e) => {
           const file = e.target.files?.[0];
           if (!file) return;
 
+          const extension = file.name.split(".").pop()?.toLowerCase();
           const reader = new FileReader();
+
           reader.onload = (event) => {
             const text = event.target?.result as string;
-            setSystemInstruction(text);
+
+            let contentToSet = "";
+
+            if (extension === "json") {
+              try {
+                const data = JSON.parse(text);
+                if (
+                  data?.systemInstruction &&
+                  typeof data.systemInstruction === "string"
+                ) {
+                  contentToSet = data.systemInstruction;
+                } else {
+                  console.warn(
+                    "No systemInstruction field found in JSON file."
+                  );
+                }
+              } catch (err) {
+                console.error("Failed to parse JSON file", err);
+              }
+
+              // .txt and .md just use the raw text
+            } else {
+              contentToSet = text;
+            }
+
+            setSystemInstruction(contentToSet);
+
+            // Auto-expand textarea after setting
+            requestAnimationFrame(() => {
+              if (systemInputRef.current) {
+                const el = systemInputRef.current;
+                el.style.height = "auto";
+                el.style.height = `${el.scrollHeight}px`;
+              }
+            });
           };
+
           reader.readAsText(file);
         }}
         className="hidden"
@@ -126,6 +162,7 @@ export default function Prompt() {
               </div>
 
               <motion.textarea
+                ref={systemInputRef}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
