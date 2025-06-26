@@ -7,14 +7,14 @@ export default function Prompting101() {
         </h1>
 
         <nav className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-100 tracking-tight mb-3">
+          <h2 className="text-xl font-semibold text-gray-300 tracking-tight mb-3">
             Table of Contents
           </h2>
           <ul className="space-y-2 pl-1">
             <li>
               <a
                 href="#what"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 What Is Prompting?
               </a>
@@ -22,7 +22,7 @@ export default function Prompting101() {
             <li>
               <a
                 href="#why"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 Why It Matters
               </a>
@@ -30,7 +30,7 @@ export default function Prompting101() {
             <li>
               <a
                 href="#history"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 A Brief History of AI
               </a>
@@ -38,7 +38,7 @@ export default function Prompting101() {
             <li>
               <a
                 href="#training"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 Understanding AI Training
               </a>
@@ -46,7 +46,7 @@ export default function Prompting101() {
             <li>
               <a
                 href="#understanding"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 How AI Understands Prompts
               </a>
@@ -54,7 +54,7 @@ export default function Prompting101() {
             <li>
               <a
                 href="#tips"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 Tips for Better Prompts
               </a>
@@ -62,7 +62,7 @@ export default function Prompting101() {
             <li>
               <a
                 href="#personality"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 Shaping an AI’s “Personality”
               </a>
@@ -70,7 +70,7 @@ export default function Prompting101() {
             <li>
               <a
                 href="#sandbox"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 PromptPilot: Your Testing Ground
               </a>
@@ -485,7 +485,7 @@ export default function Prompting101() {
         </section>
 
         <section id="resources" className="mt-10">
-          <h2 className="text-2xl font-bold text-gray-100 tracking-tight mb-3">
+          <h2 className="text-2xl font-bold text-gray-300 tracking-tight mb-3">
             Further Reading & Resources
           </h2>
           <ul className="space-y-2 pl-1">
@@ -494,7 +494,7 @@ export default function Prompting101() {
                 href="https://platform.openai.com/docs/guides/prompt-engineering"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 OpenAI – Prompt Engineering Guide
               </a>
@@ -504,7 +504,7 @@ export default function Prompting101() {
                 href="https://github.com/openai/openai-cookbook"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 OpenAI Cookbook – Real-World Prompt Examples
               </a>
@@ -514,7 +514,7 @@ export default function Prompting101() {
                 href="https://docs.anthropic.com/claude/docs/prompting"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 Anthropic – Claude Prompting Guide
               </a>
@@ -524,7 +524,7 @@ export default function Prompting101() {
                 href="https://huggingface.co/learn/nlp-course/chapter1/1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 Hugging Face – What Are LLMs?
               </a>
@@ -534,7 +534,7 @@ export default function Prompting101() {
                 href="https://chat.openai.com/gpts/editor"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 ChatGPT – Custom GPT Builder
               </a>
@@ -544,7 +544,7 @@ export default function Prompting101() {
                 href="https://claude.ai/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 Claude – Try Claude (Anthropic)
               </a>
@@ -554,7 +554,7 @@ export default function Prompting101() {
                 href="https://x.ai/blog/introducing-grok"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-base text-gray-300 hover:text-white hover:scale-105 hover:brightness-125 transition-all duration-200 tracking-tight"
+                className="inline-block text-base text-blue-400 hover:text-gray-300 hover:scale-105 transition-all duration-200 tracking-tight"
               >
                 xAI – Intro to Grok
               </a>

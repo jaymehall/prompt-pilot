@@ -21,11 +21,29 @@ export default function Prompt() {
   // Refs //
   const outputRef = useRef<HTMLDivElement>(null);
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleImportClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+//   const handleExport = () => {
+//   const blob = new Blob([systemInstruction], { type: "text/plain" });
+//   const url = URL.createObjectURL(blob);
+//   const a = document.createElement("a");
+//   a.href = url;
+//   a.download = `system-instruction-${Date.now()}.txt`;
+//   a.click();
+//   URL.revokeObjectURL(url);
+// };
+
+
   return (
     <PageWrapper>
-       {/* Top Row: Prompt Lab + Icons */}
+      {/* Top Row: Prompt Lab + Icons */}
       <div className="relative mb-2 h-10 -mt-4">
-
         {/* Prompt Lab */}
         <h1 className="text-2xl font-bold text-gray-100 tracking-tight absolute left-0 top-0">
           Prompt Lab
@@ -33,7 +51,6 @@ export default function Prompt() {
 
         {/* Model Selection */}
         <div className="absolute right-[50%] translate-x-[135px] top-3 font-mono text-sm text-gray-300 space-x-4">
-
           <label>
             <input
               type="radio"
@@ -69,13 +86,32 @@ export default function Prompt() {
           <Save size={18} />
         </button>
         <button
+          onClick={handleImportClick}
           className="hover:text-blue-400 transition"
-          onClick={() => console.log("Import click")}
           title="Import session"
         >
           <Upload size={18} />
         </button>
       </div>
+
+      {/* File input for uploading .txt system instructions */}
+      <input
+        type="file"
+        accept=".txt"
+        ref={fileInputRef}
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const text = event.target?.result as string;
+            setSystemInstruction(text);
+          };
+          reader.readAsText(file);
+        }}
+        className="hidden"
+      />
 
       {/* Two-Panel Layout */}
       <div className="flex flex-col md:flex-row gap-6 h-[80vh]">
