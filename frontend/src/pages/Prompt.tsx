@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import PageWrapper from "../components/PageWrapper";
 import { motion } from "framer-motion";
+import { Save, Upload } from "lucide-react";
 import MarkdownOutput from "../components/MarkdownOutput";
 
 export default function Prompt() {
@@ -22,15 +23,17 @@ export default function Prompt() {
 
   return (
     <PageWrapper>
-      {/* Title + Centered Toggle (Prompt Lab stays left) */}
+       {/* Top Row: Prompt Lab + Icons */}
       <div className="relative mb-2 h-10 -mt-4">
-        {/* Prompt Lab stays left */}
+
+        {/* Prompt Lab */}
         <h1 className="text-2xl font-bold text-gray-100 tracking-tight absolute left-0 top-0">
           Prompt Lab
         </h1>
 
-        {/* Model Selection Centered */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-2 font-mono text-sm text-gray-300 space-x-4">
+        {/* Model Selection */}
+        <div className="absolute right-[50%] translate-x-[220px] top-2 font-mono text-sm text-gray-300 space-x-4">
+
           <label>
             <input
               type="radio"
@@ -54,6 +57,24 @@ export default function Prompt() {
             Claude 3.5
           </label>
         </div>
+      </div>
+
+      {/* Save / Upload Buttons - Top Right */}
+      <div className="absolute right-10 top-7 flex gap-3 pr-1">
+        <button
+          className="hover:text-green-400 transition"
+          onClick={() => console.log("Export click")}
+          title="Export session"
+        >
+          <Save size={18} />
+        </button>
+        <button
+          className="hover:text-blue-400 transition"
+          onClick={() => console.log("Import click")}
+          title="Import session"
+        >
+          <Upload size={18} />
+        </button>
       </div>
 
       {/* Two-Panel Layout */}
