@@ -32,7 +32,7 @@ export default function Prompt() {
         </h1>
 
         {/* Model Selection */}
-        <div className="absolute right-[50%] translate-x-[220px] top-2 font-mono text-sm text-gray-300 space-x-4">
+        <div className="absolute right-[50%] translate-x-[135px] top-3 font-mono text-sm text-gray-300 space-x-4">
 
           <label>
             <input
@@ -43,7 +43,7 @@ export default function Prompt() {
               onChange={(e) => setModel(e.target.value)}
               className="mr-1"
             />
-            GPT-3.5
+            GPT
           </label>
           <label>
             <input
@@ -54,13 +54,13 @@ export default function Prompt() {
               onChange={(e) => setModel(e.target.value)}
               className="mr-1"
             />
-            Claude 3.5
+            Claude
           </label>
         </div>
       </div>
 
       {/* Save / Upload Buttons - Top Right */}
-      <div className="absolute right-10 top-7 flex gap-3 pr-1">
+      <div className="absolute right-10 top-9 flex gap-4 pr-1">
         <button
           className="hover:text-green-400 transition"
           onClick={() => console.log("Export click")}
