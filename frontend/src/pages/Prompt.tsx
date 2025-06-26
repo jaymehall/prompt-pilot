@@ -29,15 +29,26 @@ export default function Prompt() {
     }
   };
 
-  //   const handleExport = () => {
-  //   const blob = new Blob([systemInstruction], { type: "text/plain" });
-  //   const url = URL.createObjectURL(blob);
-  //   const a = document.createElement("a");
-  //   a.href = url;
-  //   a.download = `system-instruction-${Date.now()}.txt`;
-  //   a.click();
-  //   URL.revokeObjectURL(url);
-  // };
+  // Export session as .json (includes instruction, model, and messages)
+  const handleExportSessionAsJSON = () => {
+    const session = {
+      systemInstruction,
+      model,
+      messages,
+      date: new Date().toISOString(),
+    };
+
+    const blob = new Blob([JSON.stringify(session, null, 2)], {
+      type: "application/json",
+    });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `prompt-session-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <PageWrapper>
@@ -75,19 +86,19 @@ export default function Prompt() {
         </div>
       </div>
 
-      {/* Save / Upload Buttons - Top Right */}
+      {/* File export/save + upload/import buttons - Top Right */}
       <div className="absolute right-10 top-9 flex gap-4 pr-1">
         <button
           className="hover:text-green-400 transition"
-          onClick={() => console.log("Export click")}
-          title="Export session"
+          onClick={handleExportSessionAsJSON}
+          title="Export session as .json"
         >
           <Save size={18} />
         </button>
         <button
           onClick={handleImportClick}
           className="hover:text-blue-400 transition"
-          title="Import session"
+          title="Import session file"
         >
           <Upload size={18} />
         </button>
