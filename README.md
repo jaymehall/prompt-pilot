@@ -6,9 +6,11 @@
 
 ## Overview
 
-**PromptPilot** is a full-stack AI customization tool that lets users design, test, and refine GPT agents using custom prompts and system instructions — all in a polished, side-by-side interface. Built with React, FastAPI, and PostgreSQL, the platform supports OpenAI and Claude API integration, secure prompt sessions, and user-friendly UX with a dark, modern aesthetic.
+**PromptPilot** is a full-stack AI customization tool that lets users design, test, and refine GPT agents using custom prompts and system instructions — all in a polished, side-by-side interface. Built with React, FastAPI, and PostgreSQL, the platform supports OpenAI and Claude API integration, secure prompt sessions, multi-format file import/export, and a user-friendly CLI-inspired UX.
 
 PromptPilot is both a productivity tool and an educational experience: it empowers anyone — devs, writers, educators — to explore AI behavior design without needing to code.
+
+---
 
 ## Features
 
@@ -16,11 +18,15 @@ PromptPilot is both a productivity tool and an educational experience: it empowe
 - Model Toggle: Seamless GPT-3.5 and Claude 3.5 selection with persistent context
 - Dynamic Labeling: Assistant responses labeled as GPT or Claude in real-time
 - Markdown Output Viewer: Renders LLM responses cleanly
-- Save Sessions: Prompts, system instructions, model, and output device-based export/import (cloud/local DB support coming soon)
-- Export/Import Sessions: Save and upload `.md`, `.json`, or `.txt` prompt files
+- Save Sessions: Export `.json` session files (with model, instruction, and messages)
+- Upload `.txt`, `.json`, or `.md` files directly into the instruction panel
+- Auto-expanding system instruction box with scrollHeight syncing
+- CLI-style Save Dropdown: Choose `.json` or `.txt` export format from top-right
 - Auth (v2): Planned JWT login system with user-specific session history and analytics
-- Polished UI: Dark theme, smooth animations, minimal layout
+- Polished UI: Dark terminal-themed layout, smooth animations, keyboard-style dropdowns
 - Deployment: Vercel (frontend), Render (backend), PostgreSQL DB
+
+---
 
 ## Project Phases
 
@@ -28,6 +34,8 @@ PromptPilot is both a productivity tool and an educational experience: it empowe
 - v1.5: Add Claude model support, toggle UI
 - v2: JWT auth, user-specific session history (DB-backed)
 - v2.5+: Model comparison, analytics, agent deploy
+
+---
 
 ## Technologies
 
@@ -45,7 +53,10 @@ PromptPilot is both a productivity tool and an educational experience: it empowe
 - SQLAlchemy (ORM)
 - Deployed via Render
 
+---
+
 ## Skills Demonstrated
+
 - Full-stack app architecture
 - Multi-model API routing (GPT + Claude)
 - Secure API proxying (OpenAI + Claude)
@@ -54,8 +65,10 @@ PromptPilot is both a productivity tool and an educational experience: it empowe
 - Dark-themed responsive UI
 - RESTful API design with FastAPI + PostgreSQL
 - JWT auth and session storage (v2)
-- Markdown file handling (export/import)
+- File export/import: `.json`, `.txt`, `.md`
 - Real-world deployment using GitHub CI, Vercel, and Render
+
+---
 
 ## Usage Instructions
 
@@ -66,8 +79,6 @@ git clone https://github.com/Cyberbot777/prompt-pilot.git
 cd prompt-pilot
 ```
 
----
-
 ### 2. Set Up the Frontend
 
 ```bash
@@ -77,8 +88,6 @@ npm run dev
 ```
 
 Visit: [http://localhost:5173](http://localhost:5173)
-
----
 
 ### 3. Set Up the Backend (FastAPI)
 
@@ -91,8 +100,6 @@ uvicorn main:app --reload
 ```
 
 Backend will run at: [http://localhost:8000](http://localhost:8000)
-
----
 
 ### 4. Environment Variables
 
@@ -111,7 +118,7 @@ Set these in `.env` files (frontend & backend as needed):
 ## Timeline
 
 - Created: June 22, 2025  
-- Last Updated: June 25, 2025
+- Last Updated: June 26, 2025
 
 ---
 

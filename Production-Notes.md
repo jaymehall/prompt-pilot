@@ -1,6 +1,6 @@
 # PromptPilot Production Notes
 
-**Project Status:** Updated June 24, 2025
+**Project Status:** Updated June 26, 2025
 
 ---
 
@@ -14,6 +14,7 @@ This document details:
 - UI behavior
 - Custom styling decisions
 - Backend API integration
+- File import/export logic for prompt sessions
 - Production deployment + custom domain setup
 - Multi-model Claude integration with model labeling
 
@@ -25,7 +26,7 @@ This document details:
 - **Backend:** FastAPI (Python 3.11), served via Uvicorn
 - **LLM API:** OpenAI `gpt-3.5-turbo`, Anthropic `claude-3-5-sonnet-20241022`
 - **Deployment Target:** Vercel (frontend), Render (backend)
-- **Styling:** TailwindCSS + custom scrollbar overrides via `index.css`
+- **Styling:** TailwindCSS + custom scrollbars, dark terminal UI
 
 ---
 
@@ -69,39 +70,50 @@ This document details:
 ### ➤ Left Panel (Prompt Editor)
 
 - System instruction input
-  - Monospaced
+  - Monospaced font
   - Terminal style header: `user@prompt-lab:~$ System Instruction:`
   - Auto-expands with `scrollHeight` logic
   - Custom green scrollbar (`.custom-scroll`)
   - Max-height: 70vh with vertical scroll fallback
+  - **Supports import from `.txt`, `.json`, or `.md`**
+  - **Auto-expands after import**
 
 ### ➤ Right Panel (AI Chat)
 
-- Model toggle radio buttons centered above output
-- User input textarea
-  - Expandable
-  - Press `Enter` to send
-  - Press `Shift+Enter` for newlines
-  - Scrollbar styled to match input ring blue (`#60a5fa`)
-  - Uses class `.scroll-blue`
-- GPT/Claude response area
-  - Typing effect animates one character at a time (40ms)
-  - Messages are dynamically labeled: `GPT:`, `Claude:`, `You:`
-  - Scrollbar styled to match UI (`.scroll-output`)
-  - **Auto-scrolls to bottom** as new characters appear
+- Model toggle buttons above output
+- User input field
+  - Expandable with shift+enter
+  - Styled scroll ring
+- AI output area
+  - Animated GPT/Claude responses
+  - Model name labeling
+  - **Auto-scrolls to latest message**
+
+### ➤ Toolbar (Top Right)
+
+- **Save Icon**:  
+  Triggers dropdown with export options:
+  - `.json` — exports full session (instruction, model, messages)
+  - `.txt` — exports only the system instruction
+
+- **Upload Icon**:  
+  Opens file picker to import `.txt`, `.json`, or `.md`
+
+- **Export menu**:  
+  Closes on outside click or Escape
 
 ---
 
 ## UX Behavior
 
-- Placeholder message dynamically updates to reflect selected model
+- Model selection updates placeholder dynamically
 - Claude and GPT responses labeled clearly
-- GPT replies animate in using `setInterval()` with 40ms delay
-- Instruction editing does not reset chat
-- Auto-scroll behavior is active during reply animation
-- Model toggle maintains session context on frontend
-- Focus remains in input field after reply
-- Debug logs active during fetch
+- Replies animate with `setInterval(40ms)`
+- Instruction editing does not clear session
+- Auto-scroll enabled while response is typing
+- Export dropdown uses keyboard-style dropdown UX (no popups)
+- Full `.json` sessions can be re-imported (systemInstruction only)
+- `.txt` export provides writer-friendly copy of instructions
 
 ---
 
@@ -109,21 +121,20 @@ This document details:
 
 - **Frontend:** Vercel  
   - Connected to GitHub `main` branch  
-  - Environment variable `VITE_API_URL` set to backend Render URL  
+  - `VITE_API_URL` points to backend
 - **Backend:** Render  
-  - Deployed via GitHub with keys stored in `.env`  
-  - CORS updated for all frontends (localhost + production)
+  - GitHub-deployed with `.env` for keys
+  - CORS supports localhost + production
 
 ---
 
 ## Custom Domain
 
 - Registered: `prompt-pilot.ai`
-- Connected to Vercel with:
-  - `A Record (@)` → `216.198.79.193`
-  - `CNAME (www)` → `d84194a5b92e78b9.vercel-dns-017.com`
-- SSL issued successfully via Vercel
-- Full-stack live at:  
+- Connected via Vercel:
+  - `A Record`: `216.198.79.193`
+  - `CNAME`: `vercel-dns`
+- Live at:
   https://prompt-pilot.ai  
   https://www.prompt-pilot.ai
 
