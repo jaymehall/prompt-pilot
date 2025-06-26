@@ -1,35 +1,65 @@
 import { useRef, useState, useEffect } from "react";
 import PageWrapper from "../components/PageWrapper";
 import { motion } from "framer-motion";
-import { Save, Upload } from "lucide-react";
+import { Save, UploadIcon } from "lucide-react";
 import MarkdownOutput from "../components/MarkdownOutput";
 
 export default function Prompt() {
   // State //
   const [systemInstruction, setSystemInstruction] = useState("");
+  const [showExportMenu, setShowExportMenu] = useState(false);
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [messages, setMessages] = useState([
     { role: "assistant", content: "Responses will show here...", model },
   ]);
 
+  // Effect //
   useEffect(() => {
     setMessages([
       { role: "assistant", content: "Responses will show here...", model },
     ]);
   }, [model]);
 
+  // listen for outside clicks or escape key //
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        exportMenuRef.current &&
+        !exportMenuRef.current.contains(e.target as Node)
+      ) {
+        setShowExportMenu(false);
+      }
+    };
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShowExportMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   // Refs //
   const outputRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const systemInputRef = useRef<HTMLTextAreaElement | null>(null);
+  const exportMenuRef = useRef<HTMLDivElement | null>(null);
 
+  // Handler //
   const handleImportClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
 
-  // Export session as .json (includes instruction, model, and messages)
+  // Export session as .json (includes instruction, model, and messages) //
   const handleExportSessionAsJSON = () => {
     const session = {
       systemInstruction,
@@ -46,6 +76,18 @@ export default function Prompt() {
     const a = document.createElement("a");
     a.href = url;
     a.download = `prompt-session-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Export only the system instruction as .txt //
+  const handleExportAsTXT = () => {
+    const blob = new Blob([systemInstruction], { type: "text/plain" });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `prompt-instruction-${Date.now()}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -86,23 +128,53 @@ export default function Prompt() {
         </div>
       </div>
 
-      {/* File export/save + upload/import buttons - Top Right */}
+      {/* File export/save + upload buttons - Top Right */}
       <div className="absolute right-10 top-9 flex gap-4 pr-1">
+        {/* Save dropdown trigger */}
         <button
+          onClick={() => setShowExportMenu((prev) => !prev)}
           className="hover:text-green-400 transition"
-          onClick={handleExportSessionAsJSON}
-          title="Export session as .json"
+          title="Export session"
         >
           <Save size={18} />
         </button>
+
+        {/* Upload button */}
         <button
           onClick={handleImportClick}
           className="hover:text-blue-400 transition"
           title="Import session file"
         >
-          <Upload size={18} />
+          <UploadIcon size={18} />
         </button>
       </div>
+
+      {/* Export dropdown menu */}
+      {showExportMenu && (
+        <div
+          ref={exportMenuRef}
+          className="absolute right-10 top-16 bg-black border border-green-700 text-green-300 text-sm font-mono shadow-md z-50"
+        >
+          <button
+            onClick={() => {
+              handleExportSessionAsJSON();
+              setShowExportMenu(false);
+            }}
+            className="block w-full text-left px-3 py-1 hover:bg-green-800"
+          >
+            Export as .json
+          </button>
+          <button
+            onClick={() => {
+              handleExportAsTXT();
+              setShowExportMenu(false);
+            }}
+            className="block w-full text-left px-3 py-1 hover:bg-green-800"
+          >
+            Export as .txt
+          </button>
+        </div>
+      )}
 
       {/* File input for uploading .txt, .json, or .md system instructions */}
       <input
@@ -137,9 +209,8 @@ export default function Prompt() {
               } catch (err) {
                 console.error("Failed to parse JSON file", err);
               }
-
-              // .txt and .md just use the raw text
             } else {
+              // .txt and .md just use the raw text
               contentToSet = text;
             }
 
