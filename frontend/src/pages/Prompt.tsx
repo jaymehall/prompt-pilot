@@ -8,7 +8,7 @@ export default function Prompt() {
   // State //
   const [systemInstruction, setSystemInstruction] = useState("");
   const [showExportMenu, setShowExportMenu] = useState(false);
-  const [model, setModel] = useState("gpt-3.5-turbo");
+  const [model, setModel] = useState("gpt-4.1");
   const [messages, setMessages] = useState([
     { role: "assistant", content: "Responses will show here...", model },
   ]);
@@ -107,8 +107,8 @@ export default function Prompt() {
             <input
               type="radio"
               name="model"
-              value="gpt-3.5-turbo"
-              checked={model === "gpt-3.5-turbo"}
+              value="gpt-4.1"
+              checked={model === "gpt-4.1"}
               onChange={(e) => setModel(e.target.value)}
               className="mr-1"
             />

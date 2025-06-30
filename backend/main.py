@@ -33,7 +33,7 @@ class Message(BaseModel):
 class GenerateRequest(BaseModel):
     systemInstruction: str
     messages: List[Message]
-    model: str = "gpt-3.5-turbo"
+    model: str = "gpt-4o"
 
 @app.post("/api/generate")
 async def generate(data: GenerateRequest):
@@ -45,7 +45,7 @@ async def generate(data: GenerateRequest):
 
         if data.model.startswith("gpt"):
             response = client.chat.completions.create(
-                model=data.model,
+                model="gpt-4.1",
                 messages=[
                     {"role": "system", "content": data.systemInstruction},
                     *[{"role": m.role, "content": m.content} for m in data.messages]
