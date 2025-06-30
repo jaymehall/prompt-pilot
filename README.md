@@ -95,6 +95,7 @@ Visit: [http://localhost:5173](http://localhost:5173)
 cd backend
 python -m venv venv
 source venv/Scripts/activate   # Use this in Git Bash
+source venv/bin/activate # Use this on Mac
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
